@@ -9,7 +9,7 @@ n_standard_columns = 5;
 // height expressed as number of switches
 column_heights = [4, 5, 5, 5, 5];
 // shim is top offset (mm), + is lower, - is higher
-column_shims = [0, -5, -8, -12, -12];
+column_shims = [-4, -8, -12, -10, -2];
 
 // approx. kailh dimensions (mm)
 switch_dims= [
@@ -88,11 +88,9 @@ module outer_section() {
         would still require setting the shims to make the rows
         align between those cols
     */ 
-    inner_shim = -8;
+    inner_shim = 0;
     inner_height = 5; 
-    // inner_shim and outer_shim need to align the rows
-    // TODO how to explicitly constrain them to do so?
-    outer_shim = 11;
+    outer_shim = inner_shim + bracket_dims.x;
     outer_height = 4;
     difference() {
         union () {
@@ -208,7 +206,7 @@ module keyboard(rot=false) {
     // i kinda picked the wrong orientation :(
     rotate([0, 0, rot ? -90 : 0]) {
         translate([0, 5, 0]) { 
-            half();
+            // half();
         }
         translate([0, -5, 0]) {
             mirror([0, 1, 0]) {
